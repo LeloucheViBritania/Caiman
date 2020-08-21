@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <main class="main-content">
+        <div class="block">
+            <div class="container-fluid">
+                <div class="position-relative ch">
+                    <h1>Contacts</h1>
+                    <form action="#" class="search-form">
+                        <input type="text" placeholder="rechercher">
+                        <button type="submit">
+                            <img src="~/Content/icons/search.svg" class="img-fluid" alt="search">
+                        </button>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-5">
+                        <a href="newContact.html">
+                            <button class="btn-green">Nouveau contact</button>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                        <div class="simple-card">
+                            <div class="simple-card__content">
+                                <h2 class="mt-2">M. Koffi Anvi Yves Donald</h2>
+                                <h3>Chef de cabinet du président</h3>
+                                <ol class="contact-info mt-4 mb-5">
+                                    <li>
+                                        <img src="~/Content/icons/phone.svg" alt="phone">
+                                        <span> +225 40776603</span>
+                                    </li>
+                                    <li>
+                                        <img src="~/Content/icons/email.svg" alt="mail">
+                                        <span> le mail@gmail.com</span>
+                                    </li>
+                                    <li>
+                                        <img src="~/Content/icons/globe.svg" alt="website">
+                                        <span> website.com</span>
+                                    </li>
+                                </ol>
+                                <a href="modifContact.html">
+                                    <button class="btn-tlight">Modifier</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row mt-5 mb-5">
+                    <div class="col-12 text-center">
+                        <ul class="pagination">
+                            <li>
+                                <div>
+                                    <img src="~/Content/icons/arrowb.svg" class="rotate" alt="arrow">
+                                </div>
+                            </li>
+                            <li>
+                                <h4>2 sur 344</h4>
+                            </li>
+                            <li>
+                                <div>
+                                    <img src="~/Content/icons/arrowb.svg" alt="arrow">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
