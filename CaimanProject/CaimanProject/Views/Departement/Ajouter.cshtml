@@ -1,0 +1,59 @@
+﻿@model CaimanProject.Models.Specialite
+
+<main class="main-content">
+    <div class="block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-white">
+                            <li class="breadcrumb-item"><a href="contact.html">Contact</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Nouveau contact</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-12">
+                    <div class="departmentDesc">
+                        <h1>Nouvelle spécialité</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="simple-card">
+                        <div class="simple-card__content">
+                            <form action="#" class="formular" method="post" enctype="multipart/form-data">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-5">
+                                        <label for="nom">Nom Spécialité</label>
+                                        <input type="text" class="form-control" id="SpecialiteName" name="SpecialiteName">
+                                    </div>
+                                    <div class="form-group col-md-6 mb-5">
+                                        <label for="prenoms">Couleur</label>
+                                        <input type="text" class="form-control" id="SpecialiteColor" name="SpecialiteColor" placeholder="la couleur en anglais svp">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-5">
+                                        <label for="email">Description</label>
+                                        <input type="text" class="form-control" id="SpecialiteDescription" name="SpecialiteDescription">
+                                    </div>
+                                    <div class="form-group col-md-6 mb-5">
+                                        <label for="tel">Image</label>
+                                        <input type="file" class="form-control" id="ImageSpecialité" name="ImageSpecialité">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-green">
+                                    Enregistrer
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+

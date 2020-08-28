@@ -1,0 +1,110 @@
+﻿@model CaimanProject.VM.ProVm
+
+
+<main class="main-content">
+    <div class="block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-white">
+                            <li class="breadcrumb-item"><a href="index.html">Tableau de bord</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Nouveau projet</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-12">
+                    <div class="departmentDesc">
+                        <h1>Nouveau projets</h1>
+                    </div>
+                </div>
+            </div>
+            @*Creation d'un projet le formulaire*@
+            @using (Html.BeginForm("Index","NewProjet",FormMethod.Post, new {enctype = "multipart/form-data", @class = "formular"}))
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="simple-card">
+                            <div class="simple-card__content">
+                                <div class="form-group mb-5">
+                                    @Html.LabelFor(m => m.ProjetName, "Désignation du projet")
+                                    @Html.TextBoxFor(m => m.ProjetName, new { @class = "form-control" })
+                                </div>
+                                <div class="form-group mb-5">
+                                    @Html.LabelFor(m => m.ProjetDescription, "Description")
+                                    @Html.TextAreaFor(m => m.ProjetDescription, new { @class = "form-control" })
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-5">
+                                        <label for="ProjetCahierCharge">Cahier des charges</label>
+                                        <input type="file" class="form-control" id="ProjetCahierCharge" name="ProjetCahierCharge">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="departmentDesc">
+                            <h1>@("Choix des membres")</h1>
+                        </div>
+                    </div>
+                    @foreach (var item in Model.Specialites)
+                    {
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="simple-card">
+                                <div class="simple-card__content">
+                                    <h3>@item.SpecialiteName</h3>
+                                    <ul class="dmembers-list">
+                                        @foreach (var data in Model.Members)
+                                        {
+                                            if (data.SpecialiteId == item.SpecialiteId)
+                                            {
+                                                <li>
+                                                    <div class="form__radio-group">
+                                                        <input type="checkbox" class="form__radio-input" id="@data.MemberId" name="@data.MemberId" value="@data.MemberId" />
+                                                        <label class="form__radio-label" for="@data.MemberId">
+                                                            <span class="form__radio-button"></span>
+                                                            <div class="member-line">
+                                                                <div class="photo-box" style="border:1px solid @item.SpecialiteColor">
+                                                                    <img src="/Content/img/user.png" alt="username" />
+                                                                </div>
+                                                                <div class="member-line__info">
+                                                                    <h4>@data.MemberName</h4>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span>@data.MemberMissionActive mission(s) en cours</span>
+                                                                        <div class="round"></div>
+                                                                        <div class="round"></div>
+                                                                        <div class="round"></div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            }
+
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+
+
+                <button type="submit" class="btn-green">
+                    Enregistrer
+                </button>
+
+            }
+
+
+        </div>
+    </div>
+</main>
+
