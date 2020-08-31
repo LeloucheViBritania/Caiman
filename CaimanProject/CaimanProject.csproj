@@ -273,6 +273,11 @@
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\ProjetController.cs" />
     <Compile Include="DAL\DbCaimanContext.cs" />
+    <Compile Include="DTOs\CompetenceDTO.cs" />
+    <Compile Include="DTOs\ProfilMemberDTO.cs" />
+    <Compile Include="DTOs\SocialNetworkDTO.cs" />
+    <Compile Include="DTOs\SpecialiteDTO.cs" />
+    <Compile Include="DTOs\TransportDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

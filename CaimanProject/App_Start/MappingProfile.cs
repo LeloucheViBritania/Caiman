@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using CaimanProject.Models;
-using CaimanProject.VM;
+
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using CaimanProject.DTOs;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CaimanProject.VM;
 
 namespace CaimanProject.App_Start
 {
@@ -16,8 +18,25 @@ namespace CaimanProject.App_Start
             Mapper.CreateMap<Member, MembersDTO>();
             Mapper.CreateMap<MembersDTO, Member>();
             Mapper.CreateMap<NoteP, NotePDTO>();
+            
             Mapper.CreateMap<NotePDTO, NoteP>();
+            Mapper.CreateMap<Competence, CompetenceDTO>();
+            Mapper.CreateMap<CompetenceDTO, Competence>();
+
+            Mapper.CreateMap<SocialNetwork, SocialNetworkDTO>();
+            Mapper.CreateMap<SocialNetworkDTO, SocialNetwork>();
+
+            Mapper.CreateMap<Specialite, SpecialiteDTO>();
+            Mapper.CreateMap<SpecialiteDTO, Specialite>();
+
+            Mapper.CreateMap<Transport, TransportDTO>();
+            Mapper.CreateMap<TransportDTO, Transport>();
             /* IQueryable<IdentityRole> MembersDTOs = null;*/
+            Mapper.CreateMap<ProfilMemberDTO, Member>();
+            Mapper.CreateMap<Member, ProfilMemberDTO>()
+                .ForMember(dto=>dto.SocialNetworks, opt=>opt.MapFrom(x=>x.SocialNetworks))
+                .ForMember(dto=>dto.Specialite, opt=>opt.MapFrom(x=>x.Specialite))
+                .ForMember(dto=>dto.Competences, opt=>opt.MapFrom(x=>x.Competences));
 
             Mapper.CreateMap<Projet, ProjetsDTO>()
                 .ForMember(dto => dto.MembersDTOs, opt => opt.MapFrom(x => x.ProjetMembers.Select(y => y.Member).ToList()));
