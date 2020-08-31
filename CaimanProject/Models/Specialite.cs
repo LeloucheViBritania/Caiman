@@ -17,8 +17,10 @@ namespace CaimanProject.Models
 
         public string SpecialiteColor { get; set; }
 
+        public string Url_Image { get; set; }
+        public string ImageSpecialité { get; set; }
         //Recupere tous les membre d'une specialite
-       
+
         public virtual ICollection<Member> Members { get; set; }
     }
 }

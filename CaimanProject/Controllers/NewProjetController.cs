@@ -1,4 +1,5 @@
-﻿using CaimanProject.DAL;
+﻿using AutoMapper;
+using CaimanProject.DAL;
 using CaimanProject.Models;
 using CaimanProject.VM;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +10,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace CaimanProject.Controllers
 {
     public class NewProjetController : Controller
     {
-        public bool IsChecked { get; private set; }
-
        
         // GET: NewProjet
 
@@ -36,6 +36,25 @@ namespace CaimanProject.Controllers
             };
             return View(viewModel);
         }
+
+       /* public ActionResult ProjetDetail(int id)
+        {
+            var _context = new DbCaimanContext();
+
+
+            var projetDetail = _context.Projets.Include(c => c.ProjetMembers)
+                                                    .ThenInclude(m => m.Member)
+                                                .Include(no => no.NotePs)
+                                                .SingleOrDefault(c => c.ProjetId == id);
+
+
+            var projetDe = Mapper.Map<Projet, ProjetDetailDTO>(projetDetail);
+            ProjetDetailDTO projetDetailDTO = new ProjetDetailDTO();
+            projetDetailDTO = projetDe;
+            return View(projetDetailDTO);
+        }*/
+
+        //Post d'un nouveau projet 
         [HttpPost]
         public ActionResult Index(FormCollection fromEnnui)
         {
@@ -53,6 +72,7 @@ namespace CaimanProject.Controllers
                 Specialites = _context.Specialites.ToList(),
                 memerBySpe = _context.Members.ToList()
             };
+            
             List<string>lisMembers = new List<string>();
             List <Member> memberSelect= new List<Member>();
             var file = Request.Files["ProjetCahierCharge"];
@@ -72,40 +92,73 @@ namespace CaimanProject.Controllers
                     addMem = _context.Members.FirstOrDefault(c => c.MemberId == int.Parse(item));
                     addMem.IsChecked = true;
                     memberSelect.Add(addMem);
-                    
                 }
+
+
                 _context.Members.UpdateRange(memberSelect);
+                _context.SaveChanges();
+
             }
 
-
+            //une fois le model est valide
 
             if (ModelState.IsValid)
             {
                 var addProjetMembers = new Projet
                 {
 
-                    ProjetName = fromEnnui["ProjeName"],
+                    ProjetName = fromEnnui["ProjetName"],
                     ProjetDateDebut = DateTime.Now,
-                    ProjetDescription = fromEnnui["ProjetDescripion"],
-                    MemberProjets = new List<MembersProjet>()
+                    ProjetDescription = fromEnnui["ProjetDescription"],
+                    ProjetMembers = new List<ProjetMember>()
                 };
-                var noEntitContext = new DbCaimanContext();
-                foreach (var selectMember in _context.Members.Where(c => c.IsChecked == true).ToList())
+
+
+
+
+                var contextNoTrack = new DbCaimanContext();
+                contextNoTrack.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                var listMemberIsSelected = contextNoTrack.Members.Where(c => c.IsChecked == true).ToList();
+
+                foreach (var selectMember in listMemberIsSelected)
                 {
                     var member = new Member { MemberId = selectMember.MemberId };
-                    noEntitContext.Members.Attach(member);
-                    var projetMember = new MembersProjet
+
+
+                    contextNoTrack.Members.Attach(member);
+                    var projetMember = new ProjetMember
                     {
                         Member = member
                     };
 
-                    addProjetMembers.MemberProjets.Add(projetMember);
+                    addProjetMembers.ProjetMembers.Add(projetMember);
                 }
-                noEntitContext.Projets.Add(addProjetMembers);
-                noEntitContext.SaveChanges();
+                contextNoTrack.Projets.Add(addProjetMembers);
+                contextNoTrack.SaveChanges();
+                contextNoTrack.Dispose();
+
+
+                //remet tout les memebres a false 
+
+             
+                foreach (var item in lisMembers)
+                {
+                    Member addMem = new Member();
+                    addMem = _context.Members.FirstOrDefault(c => c.MemberId == int.Parse(item));
+                    addMem.IsChecked = false;
+                    memberSelect.Add(addMem);
+                    _context.Members.UpdateRange(memberSelect);
+                }
+                _context.SaveChanges();
+
                 RedirectToAction("Index", "Home");
+
             }
             return View(viewModel);
         }
+
+
+       
     }
+
 }

@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.0\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -258,26 +261,40 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ChekedController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DepartementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewProjetController.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
+    <Compile Include="Controllers\ProjetController.cs" />
     <Compile Include="DAL\DbCaimanContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20200820160059_InitDatabase.cs" />
-    <Compile Include="Migrations\20200820160059_InitDatabase.designer.cs">
-      <DependentUpon>20200820160059_InitDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\20200825115700_FixIsArchived.cs" />
+    <Compile Include="Migrations\20200825115700_FixIsArchived.designer.cs">
+      <DependentUpon>20200825115700_FixIsArchived.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200825174825_FixTableSpecialite.cs" />
+    <Compile Include="Migrations\20200825174825_FixTableSpecialite.designer.cs">
+      <DependentUpon>20200825174825_FixTableSpecialite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200827143010_InitDatatbase.cs" />
+    <Compile Include="Migrations\20200827143010_InitDatatbase.designer.cs">
+      <DependentUpon>20200827143010_InitDatatbase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200827173000_FixMembersDtos.cs" />
+    <Compile Include="Migrations\20200827173000_FixMembersDtos.designer.cs">
+      <DependentUpon>20200827173000_FixMembersDtos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbCaimanContextModelSnapshot.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\MembersProjet.cs" />
+    <Compile Include="Models\ProjetMember.cs" />
     <Compile Include="Models\Competence.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -290,8 +307,16 @@
     <Compile Include="Models\Transport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="VM\AllProjets.cs" />
+    <Compile Include="DTOs\MembersDTO.cs" />
     <Compile Include="VM\NewMemberVM.cs" />
+    <Compile Include="DTOs\NoteAddProDetailDTO.cs" />
+    <Compile Include="DTOs\NotePDTO.cs" />
+    <Compile Include="DTOs\ProjetDetailDTO.cs" />
+    <Compile Include="VM\ProDetailVm.cs" />
+    <Compile Include="VM\ProjetDetailsVM.cs" />
     <Compile Include="VM\ProjetMemberVm.cs" />
+    <Compile Include="DTOs\ProjetsDTO.cs" />
     <Compile Include="VM\ProVm.cs" />
     <Compile Include="VM\SaveMemberViewModel.cs" />
   </ItemGroup>
@@ -376,9 +401,17 @@
     <Content Include="Views\Shared\NavBarPartial\_NavBar.cshtml" />
     <Content Include="Views\Home\NewMember.cshtml" />
     <Content Include="Views\NewProjet\Index.cshtml" />
+    <Content Include="Views\Projet\ProjetDetail.cshtml" />
+    <Content Include="Views\Departement\Ajouter.cshtml" />
+    <Content Include="Views\Departement\VueDepartement.cshtml" />
+    <Content Include="Views\Departement\ProfilMember.cshtml" />
+    <Content Include="Views\Notes\AddNote.cshtml" />
+    <Content Include="Views\Notes\DetailsNote.cshtml" />
+    <Content Include="Views\Notes\NotesOnProjet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Fichier\" />
     <Folder Include="Views\Ver\" />
   </ItemGroup>
   <ItemGroup>

@@ -22,29 +22,27 @@ namespace CaimanProject.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<MembersProjet>()
+            modelBuilder.Entity<ProjetMember>()
                 .HasKey(pm => new { pm.MemberId, pm.ProjetId });
 
-            /*modelBuilder.Entity<MembersProjet>()
-                .HasKey(m => new { m.Projet, m.Member });
-            modelBuilder.Entity<MembersProjet>()
+            modelBuilder.Entity<ProjetMember>()
                 .HasOne(m => m.Member)
                 .WithMany(ma => ma.ProjetMembers)
-                .HasForeignKey(m => m.Member);
+                .HasForeignKey(m => m.MemberId);
 
 
-            modelBuilder.Entity<MembersProjet>()
-                 .HasOne(m => m.Projet)
+            modelBuilder.Entity<ProjetMember>()
+                 .HasOne(p => p.Projet)
                  .WithMany(ma => ma.ProjetMembers)
-                 .HasForeignKey(m => m.Member);*/
+                 .HasForeignKey(p => p.ProjetId);
 
 
 
             modelBuilder.Entity<Specialite>()
                 .HasMany(c => c.Members)
-                .WithOne(e => e.SpecialiteMember);
+                .WithOne(e => e.Specialite);
             modelBuilder.Entity<Member>()
-                .Ignore(x => x.SpecialiteMember);    
+                .Ignore(x => x.Specialite);    
             
             modelBuilder.Entity<Transport>()
                 .HasMany(c => c.Members)
@@ -63,7 +61,8 @@ namespace CaimanProject.DAL
         public DbSet<Specialite> Specialites { get; set; }
         public DbSet<Competence> Competences { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<MembersProjet> ProjetMembers { get; set; }
+        public DbSet<ProjetMember> ProjetMembers { get; set; }
+        public DbSet<NoteP> NotePs { get; set; }
 
     }
 }

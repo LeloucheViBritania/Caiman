@@ -12,6 +12,6 @@ namespace CaimanProject.Models
         public int SocialNetworkId { get; set; }
         public string NetworkName { get; set; }
         public string NetworkLink { get; set; }
-        public Member Member { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

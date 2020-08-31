@@ -88,7 +88,7 @@ namespace CaimanProject.Migrations
                     b.Property<string>("MemberImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("MemberIsArchived")
+                    b.Property<bool>("MemberIsArchived")
                         .HasColumnType("bit");
 
                     b.Property<string>("MemberLieuNaissance")
@@ -142,21 +142,6 @@ namespace CaimanProject.Migrations
                     b.ToTable("Members");
                 });
 
-            modelBuilder.Entity("CaimanProject.Models.MembersProjet", b =>
-                {
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjetId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MemberId", "ProjetId");
-
-                    b.HasIndex("ProjetId");
-
-                    b.ToTable("ProjetMembers");
-                });
-
             modelBuilder.Entity("CaimanProject.Models.NoteP", b =>
                 {
                     b.Property<int>("NotePId")
@@ -177,7 +162,7 @@ namespace CaimanProject.Migrations
 
                     b.HasIndex("ProjetId");
 
-                    b.ToTable("NoteP");
+                    b.ToTable("NotePs");
                 });
 
             modelBuilder.Entity("CaimanProject.Models.Projet", b =>
@@ -186,6 +171,9 @@ namespace CaimanProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsArchieved")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ProjetCahierCharge")
                         .HasColumnType("nvarchar(max)");
@@ -211,6 +199,21 @@ namespace CaimanProject.Migrations
                     b.HasKey("ProjetId");
 
                     b.ToTable("Projets");
+                });
+
+            modelBuilder.Entity("CaimanProject.Models.ProjetMember", b =>
+                {
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjetId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MemberId", "ProjetId");
+
+                    b.HasIndex("ProjetId");
+
+                    b.ToTable("ProjetMembers");
                 });
 
             modelBuilder.Entity("CaimanProject.Models.SocialNetwork", b =>
@@ -243,10 +246,16 @@ namespace CaimanProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ImageSpecialité")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SpecialiteColor")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SpecialiteName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url_Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SpecialiteId");
@@ -291,26 +300,26 @@ namespace CaimanProject.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CaimanProject.Models.MembersProjet", b =>
-                {
-                    b.HasOne("CaimanProject.Models.Member", "Member")
-                        .WithMany("MemberProjets")
-                        .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CaimanProject.Models.Projet", "Projet")
-                        .WithMany("MemberProjets")
-                        .HasForeignKey("ProjetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("CaimanProject.Models.NoteP", b =>
                 {
                     b.HasOne("CaimanProject.Models.Projet", "Projet")
                         .WithMany("NotePs")
                         .HasForeignKey("ProjetId");
+                });
+
+            modelBuilder.Entity("CaimanProject.Models.ProjetMember", b =>
+                {
+                    b.HasOne("CaimanProject.Models.Member", "Member")
+                        .WithMany("ProjetMembers")
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CaimanProject.Models.Projet", "Projet")
+                        .WithMany("ProjetMembers")
+                        .HasForeignKey("ProjetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CaimanProject.Models.SocialNetwork", b =>

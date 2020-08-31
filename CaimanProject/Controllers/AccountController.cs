@@ -12,7 +12,6 @@ using CaimanProject.Models;
 
 namespace CaimanProject.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

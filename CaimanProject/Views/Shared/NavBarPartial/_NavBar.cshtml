@@ -65,6 +65,14 @@
                             <img src="~/Content/icons/menu.svg" alt="">
                         </div>
                     </li>
+                    <li>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <a href="javascript:document.getElementById('logoutForm').submit()" class="btn-green">Se déconnecter</a>
+
+                        }
+                    </li>
                 </ul>
             </div>
         </div>

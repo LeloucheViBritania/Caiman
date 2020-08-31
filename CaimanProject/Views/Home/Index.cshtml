@@ -1,56 +1,60 @@
-﻿@{
-
-    ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
+﻿@model CaimanProject.VM.AllProjets
 <main class="main-content">
     <div class="block">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                    <a href="project.html">
-                        <div class="simple-card">
-                            <div class="simple-card__content">
-                                <span>En cours depuis le 30 Jan 2020</span>
-                                <h2 class="mt-2">Plateforme de gestion d'entreprise</h2>
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit sunt odio ea
-                                    facilis, cumque saepe. Nulla voluptatem repudiandae labore, facere a ab, aliquid dignissimos alias voluptates
-                                    repellat itaque optio soluta beatae quam consequatur eius ratione aliquam doloribus. Quaerat, id alias.
-                                </p>
-                                <div class="members">
-                                    <span>membres</span>
-                                    <ul class="mb-0 mt-3">
-                                        <li>
-                                            <div class="br-frontend">
-                                                <img src="~/Content/img/user.png" class="rounduser" alt="username" title="username">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="br-javascript">
-                                                <img src="~/Content/img/user.png" class="rounduser" alt="username" title="username">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="br-mutimedia">
-                                                <img src="~/Content/img/user.png" class="rounduser" alt="username" title="username">
-                                            </div>
-                                        </li>
-                                    </ul>
+                @foreach (var item in ViewBag.Alls)
+                {
+
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                        <a href="@Url.Action("ProjetDetail","Projet", new { id= item.ProjetId})">
+                            <div class="simple-card">
+                                <div class="simple-card__content">
+                                    <span>En cours depuis le @item.ProjetDateDebut.ToString("dd MMM yyyy")</span>
+                                    <h2 class="mt-2">@item.ProjetName</h2>
+                                    <p>
+                                        @item.ProjetDescription
+                                    </p>
+                                    <div class="members">
+                                        <span>membres</span>
+                                           
+                                        <ul class="mb-0 mt-3">
+                                            @foreach (var mbr in item.MembersDTOs)
+                                            {
+                                               
+                                                {
+
+                                                    <li>
+                                                        <div style="border:1px solid @foreach (var specia in Model.Specialites)
+                                                        {
+                                                            if (mbr.SpecialiteId == specia.SpecialiteId)
+                                                            {
+                                                                @specia.SpecialiteColor
+                                                            }
+                                                        }
+                                                            ">
+                                                           <img src="/Content/img/user.png" class="rounduser" alt="username" title="username">
+                                                        </div>
+                                                    </li>
+                                                }
+                                              
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="simple-card__progress mt-4">
+                                    <div class="progress">
+                                        <div class="progression" style="width: @item.ProjetProgressBar%;"></div>
+                                    </div>
+                                    <span>@item.ProjetProgressBar%</span>
                                 </div>
                             </div>
-                            <div class="simple-card__progress mt-4">
-                                <div class="progress">
-                                    <div class="progression" style="width: 40%;"></div>
-                                </div>
-                                <span>40%</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                }
+
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                    <a href="newProject.html">
+                    <a href="@Url.Action("Index", "NewProjet")">
                         <div class="addProject">
                             <img src="~/Content/icons/add.svg" alt="icon">
                         </div>

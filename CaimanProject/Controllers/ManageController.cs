@@ -10,7 +10,7 @@ using CaimanProject.Models;
 
 namespace CaimanProject.Controllers
 {
-    [Authorize]
+
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

@@ -16,6 +16,6 @@ namespace CaimanProject.Models
         public DateTime NotePDate { get; set; }
 
         //recupere le projet dont la note est appliquee
-        public Projet Projet { get; set; }
+        public virtual Projet Projet { get; set; } 
     }
 }

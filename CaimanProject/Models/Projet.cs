@@ -15,6 +15,8 @@ namespace CaimanProject.Models
 
         public string ProjetName { get; set; }
 
+        public bool IsArchieved { get; set; }
+
         public DateTime ProjetDateDebut { get; set; }
         public DateTime ProjetDateFin { get; set; }
 
@@ -25,8 +27,8 @@ namespace CaimanProject.Models
         public int ProjetMoney { get; set; }
 
         //recuper tous les membres qui sont dans le projet 
-        public List<MembersProjet> MemberProjets { get; set; }
+        public ICollection<ProjetMember> ProjetMembers { get; set; }
         //Recupere toutes les notes sur le projets
-        public ICollection<NoteP> NotePs { get; set; }
+        public virtual ICollection<NoteP> NotePs { get; set; }
     }
 }

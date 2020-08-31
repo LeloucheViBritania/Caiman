@@ -13,7 +13,7 @@ namespace CaimanProject.Models
 
         public string CompetenceName { get; set; }
         //recuperation d'une personne qui a une competence
-        public Member Member { get; set; }
+        public virtual Member Member { get; set; }
 
     }
 }
