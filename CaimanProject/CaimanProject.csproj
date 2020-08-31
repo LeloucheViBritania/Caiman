@@ -405,7 +405,7 @@
     <Content Include="Views\Departement\Ajouter.cshtml" />
     <Content Include="Views\Departement\VueDepartement.cshtml" />
     <Content Include="Views\Departement\ProfilMember.cshtml" />
-    <Content Include="Views\Notes\AddNote.cshtml" />
+    <Content Include="Views\Notes\AddNotes.cshtml" />
     <Content Include="Views\Notes\DetailsNote.cshtml" />
     <Content Include="Views\Notes\NotesOnProjet.cshtml" />
   </ItemGroup>

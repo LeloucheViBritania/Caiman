@@ -28,7 +28,7 @@ namespace CaimanProject.Controllers
         }
 
 
-        public ActionResult AddNote(int id)
+        public ActionResult AddNotes(int id)
         {
             var _context = new DbCaimanContext();
 
@@ -46,7 +46,7 @@ namespace CaimanProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNote(NoteP note, int id)
+        public ActionResult AddNotes(NoteP note, int id)
         {
             if (ModelState.IsValid)
             {

@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="mb-4">
                                         <h5>Transport utilisé:</h5>
-                                        <h3>@Html.DisplayFor(model => model.Transport)</h3>
+                                        <h3>@Html.DisplayFor(model => model.TransportMember.TranportName)</h3>
                                     </div>
                                 </div>
                             </div>
@@ -271,7 +271,7 @@
                                                             <div class="form-group col-md-6 mb-5">
                                                                 <label for="trsp">Transport utilisé</label>
                                                                 <select id="trsp" class="form-control" name="Transport">
-                                                                    <option value="@Html.DisplayFor(model => model.Transport)">@Html.DisplayFor(model => model.Transport)</option>
+                                                                    <option value="@Html.DisplayFor(model => model.TransportMember.TranportName)">@Html.DisplayFor(model => model.TransportMember.TranportName)</option>
                                                                     <option>Bus</option>
                                                                     <option>Taxi communal</option>
                                                                     <option>Véhicule personnel</option>
