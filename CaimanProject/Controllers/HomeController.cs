@@ -42,7 +42,7 @@ namespace CaimanProject.Controllers
                 
             }
 
-            ViewBag.Alls = allProjetMembers;
+            ViewBag.Alls = allProjetMembers.Where(c => c.IsArchieved == false); ;
             VmAllP.Specialites = GetSpecilites();
             
             return View(VmAllP);
@@ -109,6 +109,108 @@ namespace CaimanProject.Controllers
             }
             return View(model);
         }
+
+
+
+
+
+
+        public ActionResult FinishProjet(int id)
+        {
+            var _context = new DbCaimanContext();
+            Projet projetF = _context.Projets.FirstOrDefault(proId => proId.ProjetId == id);
+            return View(projetF);
+        }
+
+
+
+        [HttpPost]
+
+
+        public ActionResult FinishProjet(Projet proFUp, int id)
+        {
+         
+            var _contextNoTrack = new DbCaimanContext();
+
+            var projetF = _contextNoTrack.Projets.Include(c => c.ProjetMembers)
+                                                     .ThenInclude(m => m.Member).AsNoTracking()
+                                                 .SingleOrDefault(c => c.ProjetId == id);
+            if (ModelState.IsValid)
+            {
+                projetF.IsArchieved = true;
+                projetF.ProjetDateFin = DateTime.Now;
+                projetF.ProjetMoney = proFUp.ProjetMoney;
+                projetF.ProjetProgressBar = 100;
+                var _con = new DbCaimanContext();
+                List<int> tempIdList = projetF.ProjetMembers.Select(q => q.MemberId).ToList();
+                var temp = _con.Members.Where(q => !tempIdList.Contains(q.MemberId)).AsNoTracking();
+                _contextNoTrack.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                foreach (var memProjet in temp)
+                {
+                    Member memUp = new Member
+                    {
+                        MemberId = memProjet.MemberId,
+                        MemberMissionActive = memProjet.MemberMissionActive--,
+                        MemberMissonFin = memProjet.MemberMissonFin++
+                    };
+                    var proMP = new ProjetMember
+                    {
+                        Member = memUp
+                    };
+                   projetF.ProjetMembers.Add(proMP);
+                }
+                _con.Projets.Update(projetF);
+                _con.SaveChanges();
+
+                return RedirectToAction("ArchiveAllProjet", "Home");
+            }
+            return View(projetF);
+        }
+
+
+
+        public ActionResult ArchiveAllProjet(int page = 0)
+        {
+                var _context = new DbCaimanContext();
+                /*var allProjet = GetAllProjets();*/
+                var VmAllP = new AllProjets();
+
+                var ctx = _context.Projets.Include(MP => MP.ProjetMembers)
+                    .ThenInclude(mem => mem.Member).SingleOrDefault(c => c.ProjetId == 1);
+                var ctx1 = Mapper.DynamicMap<Projet, ProjetsDTO>(ctx);
+
+                var idallPr = _context.Projets.ToList();
+
+                List<ProjetsDTO> allProjetMembers = new List<ProjetsDTO>();
+                foreach (var item in idallPr)
+                {
+                    var ctx2 = _context.Projets.Include(MP => MP.ProjetMembers)
+                   .ThenInclude(mem => mem.Member).FirstOrDefault(c => c.ProjetId == item.ProjetId);
+                    if (ctx2 != null)
+                    {
+                        ProjetsDTO monMApp = Mapper.Map<Projet, ProjetsDTO>(ctx2);
+                        allProjetMembers.Add(monMApp);
+                    }
+
+                }
+                var bedroom = allProjetMembers.Where(c => c.IsArchieved == true);
+                const int PageSize = 6; // you can always do something more elegant to set this
+
+                var count = bedroom.Count();
+
+                var data = bedroom.Skip(page * PageSize).Take(PageSize).OrderByDescending(s => s.ProjetId).ToList();
+
+                ViewBag.MaxPage = (count / PageSize) - (count % PageSize == 0 ? 1 : 0);
+
+                ViewBag.Page = page;
+                ViewBag.Alls = data;
+        
+            VmAllP.Specialites = GetSpecilites();
+                return View(VmAllP);
+
+        }
+       
+
 
     }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CaimanProject.Migrations
 {
-    public partial class FixIsArchived : Migration
+    public partial class EndProject : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,9 @@ namespace CaimanProject.Migrations
                     SpecialiteId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SpecialiteName = table.Column<string>(nullable: true),
-                    SpecialiteColor = table.Column<string>(nullable: true)
+                    SpecialiteColor = table.Column<string>(nullable: true),
+                    Url_Image = table.Column<string>(nullable: true),
+                    ImageSpecialité = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

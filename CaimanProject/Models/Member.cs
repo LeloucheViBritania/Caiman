@@ -82,7 +82,7 @@ namespace CaimanProject.Models
 
         //Recupete la specialite dont le membre fait partie
       
-        public int SpecialiteId { get; set; }
+       public int SpecialiteId { get; set; }
         public virtual Specialite Specialite { get; set; }
        
 

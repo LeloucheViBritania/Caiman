@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CaimanProject.Migrations
 {
     [DbContext(typeof(DbCaimanContext))]
-    [Migration("20200825115700_FixIsArchived")]
-    partial class FixIsArchived
+    [Migration("20200901115430_EndProject")]
+    partial class EndProject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -248,10 +248,16 @@ namespace CaimanProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ImageSpecialité")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SpecialiteColor")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SpecialiteName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url_Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SpecialiteId");

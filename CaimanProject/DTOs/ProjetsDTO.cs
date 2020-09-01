@@ -15,7 +15,7 @@ namespace CaimanProject.VM
 
         public DateTime ProjetDateDebut { get; set; }
         public string ProjetDescription { get; set; }
-
+        public int ProjetMoney { get; set; }
         public int ProjetProgressBar { get; set; }
         public IList<MembersDTO> MembersDTOs { get; set; }
     }

@@ -9,7 +9,7 @@ namespace CaimanProject.VM
     public class AllProjets
     {
 
-
+        public List<Projet> ProjetsAll { get; set; }
         public List<Specialite> Specialites { get; set; }
     }
 }

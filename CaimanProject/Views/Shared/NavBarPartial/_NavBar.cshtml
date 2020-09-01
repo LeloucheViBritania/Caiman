@@ -26,7 +26,7 @@
                             <div class="dropdown">
                                 <button class="dropbtn">Archives</button>
                                 <div class="dropdown-content">
-                                    <a href="finishedProject.html">Projets terminés <img src="~/Content/icons/arrowb.svg" alt="arrow"></a>
+                                    <a href="@Url.Action("ArchiveAllProjet", "Home")">Projets terminés <img src="~/Content/icons/arrowb.svg" alt="arrow"></a>
                                     <a href="oldmembers.html">Anciens membres <img src="~/Content/icons/arrowb.svg" alt="arrow"></a>
                                 </div>
                             </div>
@@ -65,14 +65,14 @@
                             <img src="~/Content/icons/menu.svg" alt="">
                         </div>
                     </li>
-                    <li>
+                    @*<li>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                             @Html.AntiForgeryToken()
                             <a href="javascript:document.getElementById('logoutForm').submit()" class="btn-green">Se déconnecter</a>
 
                         }
-                    </li>
+                    </li>*@
                 </ul>
             </div>
         </div>

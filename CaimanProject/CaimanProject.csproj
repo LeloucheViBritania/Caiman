@@ -281,21 +281,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20200825115700_FixIsArchived.cs" />
-    <Compile Include="Migrations\20200825115700_FixIsArchived.designer.cs">
-      <DependentUpon>20200825115700_FixIsArchived.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200825174825_FixTableSpecialite.cs" />
-    <Compile Include="Migrations\20200825174825_FixTableSpecialite.designer.cs">
-      <DependentUpon>20200825174825_FixTableSpecialite.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200827143010_InitDatatbase.cs" />
-    <Compile Include="Migrations\20200827143010_InitDatatbase.designer.cs">
-      <DependentUpon>20200827143010_InitDatatbase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20200827173000_FixMembersDtos.cs" />
-    <Compile Include="Migrations\20200827173000_FixMembersDtos.designer.cs">
-      <DependentUpon>20200827173000_FixMembersDtos.cs</DependentUpon>
+    <Compile Include="Migrations\20200901115430_EndProject.cs" />
+    <Compile Include="Migrations\20200901115430_EndProject.designer.cs">
+      <DependentUpon>20200901115430_EndProject.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbCaimanContextModelSnapshot.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -414,6 +402,9 @@
     <Content Include="Views\Notes\AddNotes.cshtml" />
     <Content Include="Views\Notes\DetailsNote.cshtml" />
     <Content Include="Views\Notes\NotesOnProjet.cshtml" />
+    <Content Include="Views\Home\FinishProjet.cshtml" />
+    <Content Include="Views\Home\ArchiveAllProjet.cshtml" />
+    <Content Include="Views\Home\OldMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
