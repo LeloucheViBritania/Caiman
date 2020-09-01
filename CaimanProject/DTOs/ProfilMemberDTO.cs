@@ -50,13 +50,13 @@ namespace CaimanProject.DTOs
 
         public int MemberNote { get; set; }
       
-        public virtual IList<SocialNetworkDTO> SocialNetworks { get; set; }
+        public IList<SocialNetworkDTO> SocialNetworks { get; set; }
 
-        public virtual TransportDTO TransportMember { get; set; }
+        public int SpecialiteId { get; set; }
 
-        public virtual SpecialiteDTO Specialite { get; set; }
+        public int TransportId { get; set; }
 
-        public virtual IList<CompetenceDTO> Competences { get; set; }
+        public IList<CompetenceDTO> Competences { get; set; }
 
     }
 }

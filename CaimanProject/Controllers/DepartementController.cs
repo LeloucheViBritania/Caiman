@@ -1,5 +1,9 @@
-﻿using CaimanProject.DAL;
+﻿using AutoMapper;
+using CaimanProject.DAL;
+using CaimanProject.DTOs;
 using CaimanProject.Models;
+using CaimanProject.VM;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -95,13 +99,43 @@ namespace CaimanProject.Controllers
 
         public ActionResult ProfilMember(int id)
         {
-            var bd = db.Members.Find(id);
-            return View(bd);
+            var _context = new DbCaimanContext();
+            var memberDtail = _context.Members
+                .Include(mem => mem.Competences)
+                .Include(mem => mem.SocialNetworks)
+                .FirstOrDefault(m => m.MemberId == id);
+            var memSpecialite = _context.Specialites.ToList();
+            var membTrans = _context.Transports.ToList();
+
+            var memberWithAllDetails = Mapper.Map<Member,ProfilMemberDTO>(memberDtail);
+
+
+            ProfilMVM profilMVM = new ProfilMVM();
+            profilMVM.ProfilMemberDTO = memberWithAllDetails;
+            profilMVM.Specialites = memSpecialite;
+            profilMVM.Transports = membTrans;
+            return View(profilMVM);
         }
 
         [HttpPost]
         public ActionResult ProfilMember(Member member, Competence competence, SocialNetwork socialNetwork, int id)
         {
+            var _context = new DbCaimanContext();
+            var memberDtail = _context.Members
+                .Include(mem => mem.Competences)
+                .Include(mem => mem.SocialNetworks)
+                .FirstOrDefault(m => m.MemberId == id);
+            var memSpecialite = _context.Specialites.ToList();
+            var membTrans = _context.Transports.ToList();
+
+            var memberWithAllDetails = Mapper.Map<Member, ProfilMemberDTO>(memberDtail);
+
+
+            ProfilMVM profilMVM = new ProfilMVM();
+            profilMVM.ProfilMemberDTO = memberWithAllDetails;
+            profilMVM.Specialites = memSpecialite;
+            profilMVM.Transports = membTrans;
+
             var bd = db.Members.Find(id);
 
             if (Request.Files.Count > 0)
@@ -149,7 +183,7 @@ namespace CaimanProject.Controllers
 
             if (competence.CompetenceName != null)
             {
-                var _context = new DbCaimanContext();
+                var _con = new DbCaimanContext();
                
 
                 Member memberAdd = new Member();
@@ -158,9 +192,9 @@ namespace CaimanProject.Controllers
                 Competence addCompetence = new Competence();
                 addCompetence.CompetenceName = competence.CompetenceName;
                 memberAdd.Competences.Add(addCompetence);
-                _context.Members.Add(memberAdd);
-                _context.SaveChanges();
-                _context.Dispose();
+                _con.Members.Update(memberAdd);
+                _con.SaveChanges();
+                _con.Dispose();
                /* _Transport.Members = new List<Member>();
                 if (_Specialite != null)
                 {
@@ -176,7 +210,7 @@ namespace CaimanProject.Controllers
 
             if (socialNetwork.NetworkName != null)
             {
-                var _context = new DbCaimanContext();
+                var _con = new DbCaimanContext();
                 Member memberAdd = new Member();
                 memberAdd = _context.Members.FirstOrDefault(c => c.MemberId == id);
                 memberAdd.SocialNetworks = new List<SocialNetwork>();
@@ -184,14 +218,14 @@ namespace CaimanProject.Controllers
                 socialNetwork1.NetworkName = socialNetwork.NetworkName;
                 socialNetwork1.NetworkLink = socialNetwork.NetworkLink;
                 memberAdd.SocialNetworks.Add(socialNetwork1);
-                _context.Members.Add(memberAdd);
-                _context.SaveChanges();
+                _con.Members.Add(memberAdd);
+                _con.SaveChanges();
                 
 
              /*   db.SocialNetworks.Add(socialNetwork);
                 db.SaveChanges();*/
             }
-            return RedirectToAction("ProfilMember");
+            return RedirectToAction("ProfilMember", profilMVM) ;
         }
     }
 

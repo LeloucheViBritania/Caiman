@@ -765,8 +765,8 @@ C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\bin\fr\Microsoft.Owin.Sec
 C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\bin\fr\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\bin\fr\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\bin\fr\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\obj\Debug\CaimanProject.csprojAssemblyReference.cache
 C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\obj\Debug\CaimanProject.csproj.CoreCompileInputs.cache
 C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\obj\Debug\CaimanProject.csproj.CopyComplete
 C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\obj\Debug\CaimanProject.dll
 C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\obj\Debug\CaimanProject.pdb
+C:\Users\iMac 07\Documents\GitHub\Caiman\CaimanProject\obj\Debug\CaimanProject.csprojAssemblyReference.cache

@@ -319,6 +319,7 @@
     <Compile Include="DTOs\NotePDTO.cs" />
     <Compile Include="DTOs\ProjetDetailDTO.cs" />
     <Compile Include="VM\ProDetailVm.cs" />
+    <Compile Include="VM\ProfilMVM.cs" />
     <Compile Include="VM\ProjetDetailsVM.cs" />
     <Compile Include="VM\ProjetMemberVm.cs" />
     <Compile Include="DTOs\ProjetsDTO.cs" />

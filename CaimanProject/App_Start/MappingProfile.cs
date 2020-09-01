@@ -35,9 +35,7 @@ namespace CaimanProject.App_Start
             Mapper.CreateMap<ProfilMemberDTO, Member>();
             Mapper.CreateMap<Member, ProfilMemberDTO>()
                 .ForMember(dto=>dto.SocialNetworks, opt=>opt.MapFrom(x=>x.SocialNetworks))
-                .ForMember(dto=>dto.Specialite, opt=>opt.MapFrom(x=>x.Specialite))
                 .ForMember(dto=>dto.Competences, opt=>opt.MapFrom(x=>x.Competences));
-
             Mapper.CreateMap<Projet, ProjetsDTO>()
                 .ForMember(dto => dto.MembersDTOs, opt => opt.MapFrom(x => x.ProjetMembers.Select(y => y.Member).ToList()));
             Mapper.CreateMap<ProjetMember, MembersDTO>();

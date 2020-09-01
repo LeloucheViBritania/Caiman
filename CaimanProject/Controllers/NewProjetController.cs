@@ -122,7 +122,9 @@ namespace CaimanProject.Controllers
 
                 foreach (var selectMember in listMemberIsSelected)
                 {
-                    var member = new Member { MemberId = selectMember.MemberId };
+                    var member = new Member { MemberId = selectMember.MemberId,
+                    MemberMissionActive = selectMember.MemberMissionActive++
+                    };
 
 
                     contextNoTrack.Members.Attach(member);
