@@ -17,6 +17,7 @@ namespace CaimanProject.Models
 
         public bool IsArchieved { get; set; }
 
+        public string ProjetObeservetionFinale { get; set;}
         public DateTime ProjetDateDebut { get; set; }
         public DateTime ProjetDateFin { get; set; }
 

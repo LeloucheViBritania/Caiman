@@ -15,6 +15,6 @@ namespace CaimanProject.VM
 
         public int SpecialiteId { get; set; }
 
-        public string SpecialiteColor { get; set; }
+        public int MemberNote { get; set; }
     }
 }

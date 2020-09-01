@@ -7,7 +7,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                     <div class="row">
                         <div class="col-12">
-                            <div class="team-card">
+                            <div class="team-card" style="border:2px solid @Model.SpecialiteColor">
                                 <div class="team-card__illustration">
                                     <img src="@Html.DisplayFor(model => model.Url_Image)/@Html.DisplayFor(model => model.ImageSpecialité)" alt="departement">
                                 </div>
@@ -37,7 +37,7 @@
                                 <li>
                                     <a href="/Departement/ProfilMember/@item.MemberId">
                                         <div class="member-line">
-                                            <div class="photo-box" style="border:2px solid @Html.DisplayFor(model => model.SpecialiteColor)">
+                                            <div class="photo-box" style="border:2px solid @item.SpecialiteColor">
                                                 @if (item.MemberImageName != null)
                                                 {
                                                     <img src="/Fichier/@item.MemberImageName" alt="username">

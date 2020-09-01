@@ -1,4 +1,5 @@
-﻿  <div class="top-bar">
+﻿
+    <div class="top-bar">
         <div class="block">
             <div class="container-fluid">
                 <h3>Kay Donald admin</h3>
@@ -65,13 +66,8 @@
                             <img src="~/Content/icons/menu.svg" alt="">
                         </div>
                     </li>
-                    @*<li>
-                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <a href="javascript:document.getElementById('logoutForm').submit()" class="btn-green">Se déconnecter</a>
-
-                        }
+                   @* <li>
+                        @Html.ActionLink("Se Déconnecter", "LogOut", "Account")
                     </li>*@
                 </ul>
             </div>

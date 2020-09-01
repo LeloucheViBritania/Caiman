@@ -63,6 +63,7 @@ namespace CaimanProject.DAL
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ProjetMember> ProjetMembers { get; set; }
         public DbSet<NoteP> NotePs { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }

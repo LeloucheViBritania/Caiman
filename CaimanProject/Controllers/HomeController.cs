@@ -14,6 +14,7 @@ using System.Windows.Forms;
 
 namespace CaimanProject.Controllers
 {
+    
     public class HomeController : Controller
     {
 
@@ -135,12 +136,16 @@ namespace CaimanProject.Controllers
             var projetF = _contextNoTrack.Projets.Include(c => c.ProjetMembers)
                                                      .ThenInclude(m => m.Member).AsNoTracking()
                                                  .SingleOrDefault(c => c.ProjetId == id);
+           
+           
             if (ModelState.IsValid)
             {
                 projetF.IsArchieved = true;
                 projetF.ProjetDateFin = DateTime.Now;
                 projetF.ProjetMoney = proFUp.ProjetMoney;
                 projetF.ProjetProgressBar = 100;
+                if (proFUp.ProjetObeservetionFinale != null)
+                    projetF.ProjetObeservetionFinale = proFUp.ProjetObeservetionFinale;
                 var _con = new DbCaimanContext();
                 List<int> tempIdList = projetF.ProjetMembers.Select(q => q.MemberId).ToList();
                 var temp = _con.Members.Where(q => !tempIdList.Contains(q.MemberId)).AsNoTracking();
@@ -159,6 +164,8 @@ namespace CaimanProject.Controllers
                     };
                    projetF.ProjetMembers.Add(proMP);
                 }
+                //mets la bar de progression a 100 du projet terminee a 100
+                projetF.ProjetProgressBar = 100;
                 _con.Projets.Update(projetF);
                 _con.SaveChanges();
 

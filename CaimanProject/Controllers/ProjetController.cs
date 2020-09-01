@@ -69,7 +69,7 @@ namespace CaimanProject.Controllers
 
 
         [HttpPost]
-        public ActionResult ProjetDetail(int id, FormCollection formCollectionMember)
+        public ActionResult ProjetDetail(int id, FormCollection formCollectionMember, string ProjetProgressBar)
         {
 
             var _context = new DbCaimanContext();
@@ -113,7 +113,9 @@ namespace CaimanProject.Controllers
             {
                 for (int i = 0; i < formCollectionMember.Count; i++)
                 {
-                    lisMembers.Add(formCollectionMember[i]);
+                    if (i > 0)
+                        lisMembers.Add(formCollectionMember[i]);
+                  
                 }
 
                 foreach (var item in lisMembers)
@@ -127,6 +129,12 @@ namespace CaimanProject.Controllers
                 var contextNoTrack = new DbCaimanContext();
                 contextNoTrack.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                 var listMemberIsSelected = contextNoTrack.Projets.FirstOrDefault(c => c.ProjetId == id);
+
+                //verifier si 
+                int Progress = int.Parse(ProjetProgressBar);
+                if (listMemberIsSelected.ProjetProgressBar < Progress && Progress < 97)
+                    listMemberIsSelected.ProjetProgressBar = Progress;
+                 
                 listMemberIsSelected.ProjetMembers = new List<ProjetMember>();
 
                 foreach (var mem in memberSelect)

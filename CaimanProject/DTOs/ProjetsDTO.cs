@@ -13,6 +13,7 @@ namespace CaimanProject.VM
 
         public bool IsArchieved { get; set; }
 
+        public string ProjetObeservetionFinale { get; set; }
         public DateTime ProjetDateDebut { get; set; }
         public string ProjetDescription { get; set; }
         public int ProjetMoney { get; set; }

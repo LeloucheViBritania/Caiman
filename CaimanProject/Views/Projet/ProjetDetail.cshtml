@@ -64,8 +64,19 @@
                                                     <div class="member-line__info">
                                                         <h4>@item.MemberName</h4>
                                                         <div class="d-flex align-items-center">
-                                                           @* <span>@item.Specialite-</span>&nbsp;*@
-                                                            <div class="round"></div>
+                                                            <span>
+                                                                @foreach (var specia in ViewBag.Specialites)
+                                                                {
+                                                                    if (item.SpecialiteId == specia.SpecialiteId)
+                                                                    {
+                                                                        @specia.SpecialiteName
+                                                                    }
+                                                                }"-
+                                                            </span>&nbsp;
+                                                            @for (int i = 0; i < item.MemberNote; i++)
+                                                            {
+                                                                <div class="round"></div>
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,7 +133,7 @@
 
                             </ol>
                             <div class="d-flex align-items-center">
-                                <a href="/Notes/AllNotes/@Model.projetDetailDTO.ProjetId">
+                                <a href="/Notes/NotesOnProjet/@Model.projetDetailDTO.ProjetId">
                                     <button class="img-btn">
                                         <span>Plus</span>
                                     </button>

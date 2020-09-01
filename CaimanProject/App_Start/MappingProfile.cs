@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
 using CaimanProject.Models;
-
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using CaimanProject.DTOs;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using CaimanProject.VM;
 
 namespace CaimanProject.App_Start
