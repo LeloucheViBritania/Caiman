@@ -7,11 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Microsoft.EntityFrameworkCore;
+using CaimanProject.VM;
 
 namespace CaimanProject.Controllers
 {
     public class ContactController : Controller
-    {
+    { // GET: Contact
         DbCaimanContext db = new DbCaimanContext();
         // GET: Contact
         //Pagination 
@@ -34,6 +35,7 @@ namespace CaimanProject.Controllers
 
         // recherche par nom , prenom , specialite
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Contact(string Searching)
         {
             var bg = from s in db.Contacts select s;
@@ -41,7 +43,6 @@ namespace CaimanProject.Controllers
             {
                 bg = bg.Where(s => s.ContactName.Contains(Searching) || s.ContactPname.Contains(Searching) || s.ContactFonction.Contains(Searching) || s.ContactSite.Contains(Searching));
                 ViewBag.Contact = bg.ToList();
-
             }
             return View();
         }
@@ -55,20 +56,25 @@ namespace CaimanProject.Controllers
 
         // Modification des contacts
         [HttpPost]
-        public ActionResult ModifContact(Contact contact, int id)
+        [ValidateAntiForgeryToken]
+        public ActionResult ModifContact(ContactViewModel contact, int id)
         {
-            var bd = db.Contacts.Find(id);
+
+            var bd2 = new Contact();
+            bd2 = db.Contacts.Find(id);
             if (contact != null)
             {
-                bd.ContactEmail = contact.ContactEmail;
-                bd.ContactFonction = contact.ContactFonction;
-                bd.ContactName = contact.ContactName;
-                bd.ContactNumber = contact.ContactNumber;
-                bd.ContactPname = contact.ContactPname;
-                bd.ContactSite = contact.ContactSite;
+                bd2.ContactEmail = contact.ContactEmail;
+                bd2.ContactFonction = contact.ContactFonction;
+                bd2.ContactName = contact.ContactName;
+                bd2.ContactNumber = contact.ContactNumber;
+                bd2.ContactPname = contact.ContactPname;
+                bd2.ContactSite = contact.ContactSite;
 
-                db.Contacts.Update(bd);
+                db.Contacts.Update(bd2);
                 db.SaveChanges();
+
+                ViewBag.Message = "Contact Modifié avec succès";
             }
             return View();
         }
@@ -86,18 +92,32 @@ namespace CaimanProject.Controllers
         }
         //Ajout de contact
         [HttpPost]
-        public ActionResult NewContact(Contact contact)
+        [ValidateAntiForgeryToken]
+        public ActionResult NewContact(ContactViewModel contact)
         {
 
             if (ModelState.IsValid)
             {
-                db.Contacts.Add(contact);
+                Contact c = new Contact();
+                c.ContactName = contact.ContactName;
+                c.ContactPname = contact.ContactPname;
+                c.ContactEmail = contact.ContactEmail;
+                c.ContactNumber = contact.ContactNumber;
+                c.ContactSite = contact.ContactSite;
+                c.ContactFonction = contact.ContactFonction;
+
+                db.Contacts.Add(c);
                 db.SaveChanges();
+
+                ViewBag.Message = "Contact enregistré avec succès";
+
+                ModelState.Clear();
+
                 return View();
             }
             else
             {
-                return Content("Vos information sont pas totalement complètes");
+                return View("NewContact", contact);
             }
         }
     }

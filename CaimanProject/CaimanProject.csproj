@@ -285,6 +285,10 @@
     <Compile Include="Migrations\20200901115430_EndProject.designer.cs">
       <DependentUpon>20200901115430_EndProject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200901124032_DataAchiveMember.cs" />
+    <Compile Include="Migrations\20200901124032_DataAchiveMember.designer.cs">
+      <DependentUpon>20200901124032_DataAchiveMember.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DbCaimanContextModelSnapshot.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ProjetMember.cs" />
@@ -302,10 +306,12 @@
     <Compile Include="Startup.cs" />
     <Compile Include="VM\AllProjets.cs" />
     <Compile Include="DTOs\MembersDTO.cs" />
+    <Compile Include="VM\ContactViewModel.cs" />
     <Compile Include="VM\NewMemberVM.cs" />
     <Compile Include="DTOs\NoteAddProDetailDTO.cs" />
     <Compile Include="DTOs\NotePDTO.cs" />
     <Compile Include="DTOs\ProjetDetailDTO.cs" />
+    <Compile Include="VM\OldVm.cs" />
     <Compile Include="VM\ProDetailVm.cs" />
     <Compile Include="VM\ProfilMVM.cs" />
     <Compile Include="VM\ProjetDetailsVM.cs" />
@@ -405,6 +411,8 @@
     <Content Include="Views\Home\FinishProjet.cshtml" />
     <Content Include="Views\Home\ArchiveAllProjet.cshtml" />
     <Content Include="Views\Home\OldMembers.cshtml" />
+    <Content Include="Views\Contact\NewContact.cshtml" />
+    <Content Include="Views\Contact\ModifContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

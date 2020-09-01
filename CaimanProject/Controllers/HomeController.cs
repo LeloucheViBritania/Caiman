@@ -212,6 +212,15 @@ namespace CaimanProject.Controllers
        
 
 
+        public ActionResult OldMembers()
+        {
+            var _context = new DbCaimanContext();
+            var oldMember = _context.Members.Where(m => m.MemberIsArchived == true).ToList();
+            var oldVM = new OldVm();
+            oldVM.OldMembers = oldMember;
+            return View(oldVM);
+        }
+
     }
 
 }

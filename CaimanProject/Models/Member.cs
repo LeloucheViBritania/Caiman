@@ -63,6 +63,8 @@ namespace CaimanProject.Models
         [Display(Name = "Quartier de résidence")]*/
         public string MemberQuartier { get; set; }
 
+        public DateTime MemberDateArchive { get; set; }
+
         public int MemberMissonFin { get; set; }
 
         public int MemberMissionActive { get; set; }

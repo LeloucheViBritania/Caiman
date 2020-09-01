@@ -177,6 +177,7 @@ namespace CaimanProject.Controllers
             else
             {
                 bd.MemberIsArchived = member.MemberIsArchived;
+                bd.MemberDateArchive = DateTime.Now;
                 db.Members.Update(bd);
                 db.SaveChanges();
             }
