@@ -49,6 +49,13 @@ namespace FinalCaimanProject.Controllers
         [HttpPost]
         public ActionResult AddNotes(NoteP note, int id)
         {
+            if (note.NotePDescription != null)
+                ViewBag.NoteDescription = "Svp la description !";
+
+
+            if (ViewBag.NoteDescription != null)
+                return View();
+
             if (ModelState.IsValid)
             {
                 var _context = new DbCaimanContext();

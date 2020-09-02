@@ -46,6 +46,11 @@ namespace FinalCaimanProject.App_Start
             Mapper.CreateMap<Projet, NoteAddProDetailDTO>()
                 .ForMember(dto => dto.NotePDTOs, opt => opt.MapFrom(x => x.NotePs));
 
+            Mapper.CreateMap<ProjetsDTO, MembersAllProjetDTO>();
+                
+           
+
+
         }
     }
 }

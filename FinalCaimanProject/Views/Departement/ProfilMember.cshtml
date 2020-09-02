@@ -90,7 +90,7 @@
                             </div>
                             <p>@Html.DisplayFor(model => model.ProfilMemberDTO.MemberDescription)</p>
                             <div class="d-flex align-items-center">
-                                <a href="finishedmission.html">
+                              
                                     <div class="dash-zone">
                                         @if (@Html.DisplayFor(model => model.ProfilMemberDTO.MemberMissonFin) == null)
                                         {
@@ -101,9 +101,9 @@
                                             <h4>@Html.DisplayFor(model => model.ProfilMemberDTO.MemberMissonFin) missions</h4>
                                         }
                                     </div>
-                                </a>
+                               
                                 &nbsp; &nbsp;
-                                <a href="loadingmission.html">
+                               
                                     <div class="dash-zone --continue">
                                         @if (@Html.DisplayFor(model => model.ProfilMemberDTO.MemberMissionActive) == null)
                                         {
@@ -115,7 +115,7 @@
                                         }
 
                                     </div>
-                                </a>
+                               
                                 &nbsp; &nbsp;
                                 @if (Model.ProfilMemberDTO.MemberIsArchived == true)
                                 {

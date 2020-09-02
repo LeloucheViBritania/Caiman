@@ -139,6 +139,7 @@ namespace FinalCaimanProject.Controllers
                 projetF.ProjetDateFin = DateTime.Now;
                 projetF.ProjetMoney = proFUp.ProjetMoney;
                 projetF.ProjetProgressBar = 100;
+                projetF.ProjetObservationFinal = proFUp.ProjetObservationFinal;
                 var _con = new DbCaimanContext();
                 List<int> tempIdList = projetF.ProjetMembers.Select(q => q.MemberId).ToList();
                 var temp = _con.Members.Where(q => !tempIdList.Contains(q.MemberId)).AsNoTracking();
@@ -157,7 +158,7 @@ namespace FinalCaimanProject.Controllers
                     };
                     projetF.ProjetMembers.Add(proMP);
                 }
-                projetF.ProjetProgressBar = 100;
+              
                 _con.Projets.Update(projetF);
                 _con.SaveChanges();
 

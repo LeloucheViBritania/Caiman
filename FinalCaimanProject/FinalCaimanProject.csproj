@@ -239,12 +239,14 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DepartementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MissionController.cs" />
     <Compile Include="Controllers\NewProjetController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\NotFoundController.cs" />
     <Compile Include="Controllers\ProjetController.cs" />
     <Compile Include="DAL\DbCaimanContext.cs" />
     <Compile Include="DTOs\CompetenceDTO.cs" />
+    <Compile Include="DTOs\MembersAllProjetDTO.cs" />
     <Compile Include="DTOs\ProfilMemberDTO.cs" />
     <Compile Include="DTOs\ProjetDirectiveDTO.cs" />
     <Compile Include="DTOs\SocialNetworkDTO.cs" />
@@ -253,9 +255,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20200902132254_FinalCommit.cs" />
-    <Compile Include="Migrations\20200902132254_FinalCommit.designer.cs">
-      <DependentUpon>20200902132254_FinalCommit.cs</DependentUpon>
+    <Compile Include="Migrations\20200902163053_InitDataBase.cs" />
+    <Compile Include="Migrations\20200902163053_InitDataBase.designer.cs">
+      <DependentUpon>20200902163053_InitDataBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbCaimanContextModelSnapshot.cs" />
     <Compile Include="Models\Competence.cs" />
@@ -366,6 +368,7 @@
     <Content Include="Views\Projet\Directive.cshtml" />
     <Content Include="Views\NotFound\NotFound.cshtml" />
     <Content Include="Views\Notes\AddNotes.cshtml" />
+    <Content Include="Views\Mission\MissionTerminee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,7 +15,7 @@ namespace FinalCaimanProject.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-6POII0J\SQLEXPRESS;Initial Catalog=DbCaiman;Integrated Security=True"));
+            base.OnConfiguring(optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-3ALO5CA\SQLEXPRESS01;Initial Catalog=DbCaiman;Integrated Security=True"));
         }
 
 

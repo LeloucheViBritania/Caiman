@@ -113,48 +113,49 @@ namespace FinalCaimanProject.Controllers
 
             if (formCollectionMember != null && id != 0)
             {
-                for (int i = 0; i < formCollectionMember.Count; i++)
+                if (ProjetProgressBar == null)
                 {
-                    if (i>0)
+                    for (int i = 0; i < formCollectionMember.Count; i++)
+                    {
                         lisMembers.Add(formCollectionMember[i]);
-                   
+                    }
+                    foreach (var item in lisMembers)
+                    {
+                        Member addMem = new Member();
+                        addMem = _context.Members.FirstOrDefault(c => c.MemberId == int.Parse(item));
+                        addMem.IsChecked = false;
+                        memberSelect.Add(addMem);
+                    }
                 }
-
-                foreach (var item in lisMembers)
-                {
-                    Member addMem = new Member();
-                    addMem = _context.Members.FirstOrDefault(c => c.MemberId == int.Parse(item));
-                    addMem.IsChecked = false;
-                    memberSelect.Add(addMem);
-                }
-
-             
-
-
-
                 var contextNoTrack = new DbCaimanContext();
                 contextNoTrack.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                 var listMemberIsSelected = contextNoTrack.Projets.FirstOrDefault(c => c.ProjetId == id);
-
-                int progress = int.Parse(ProjetProgressBar);
-                if (listMemberIsSelected.ProjetProgressBar < progress && progress < 97)
-                    listMemberIsSelected.ProjetProgressBar = progress;
-
-                listMemberIsSelected.ProjetMembers = new List<ProjetMember>();
-
-                foreach (var mem in memberSelect)
+                if (ProjetProgressBar != null)
                 {
-                    var member = new Member { MemberId = mem.MemberId };
-
-
-                    contextNoTrack.Members.Attach(member);
-                    var projetMember = new ProjetMember
-                    {
-                        Member = member
-                    };
-
-                    listMemberIsSelected.ProjetMembers.Add(projetMember);
+                    int progress = int.Parse(ProjetProgressBar);
+                    if (listMemberIsSelected.ProjetProgressBar < progress && progress < 97)
+                        listMemberIsSelected.ProjetProgressBar = progress;
+                    contextNoTrack.Projets.Update(listMemberIsSelected);
                 }
+                   
+                listMemberIsSelected.ProjetMembers = new List<ProjetMember>();
+                if (memberSelect!=null)
+                {
+                    foreach (var mem in memberSelect)
+                    {
+                        var member = new Member { MemberId = mem.MemberId };
+
+
+                        contextNoTrack.Members.Attach(member);
+                        var projetMember = new ProjetMember
+                        {
+                            Member = member
+                        };
+
+                        listMemberIsSelected.ProjetMembers.Add(projetMember);
+                    }
+                }
+                
                 contextNoTrack.Projets.Update(listMemberIsSelected);
                 contextNoTrack.SaveChanges();
                 return RedirectToAction("ProjetDetail", "Projet", new { id = id });
