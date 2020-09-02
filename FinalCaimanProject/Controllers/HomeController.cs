@@ -144,6 +144,7 @@ namespace FinalCaimanProject.Controllers
                 List<int> tempIdList = projetF.ProjetMembers.Select(q => q.MemberId).ToList();
                 var temp = _con.Members.Where(q => !tempIdList.Contains(q.MemberId)).AsNoTracking();
                 _contextNoTrack.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                List<Member> memUpad = new List<Member>();
                 foreach (var memProjet in temp)
                 {
                     Member memUp = new Member
@@ -152,12 +153,10 @@ namespace FinalCaimanProject.Controllers
                         MemberMissionActive = memProjet.MemberMissionActive--,
                         MemberMissonFin = memProjet.MemberMissonFin++
                     };
-                    var proMP = new ProjetMember
-                    {
-                        Member = memUp
-                    };
-                    projetF.ProjetMembers.Add(proMP);
+                    memUpad.Add(memUp);
+                 
                 }
+                _con.Members.UpdateRange(memUpad);
               
                 _con.Projets.Update(projetF);
                 _con.SaveChanges();
