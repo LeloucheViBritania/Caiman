@@ -49,34 +49,43 @@ namespace FinalCaimanProject.Controllers
         [HttpPost]
         public ActionResult AddNotes(NoteP note, int id)
         {
-            if (note.NotePDescription != null)
-                ViewBag.NoteDescription = "Svp la description !";
-
-
-            if (ViewBag.NoteDescription != null)
-                return View();
-
-            if (ModelState.IsValid)
+            if (note.NotePDescription == null)
             {
+                ViewBag.NoteDescription = "Svp la description !";
                 var _context = new DbCaimanContext();
 
-                Projet projetAdd = new Projet();
-                projetAdd = _context.Projets.FirstOrDefault(c => c.ProjetId == id);
+                var bd = _context.Projets.Include(Projet => Projet.NotePs)
+                                                    .SingleOrDefault(c => c.ProjetId == id);
 
-                projetAdd.NotePs = new List<NoteP>();
+                var NotePro = Mapper.Map<Projet, NoteAddProDetailDTO>(bd);
+                NoteAddProDetailDTO NoteDTO = new NoteAddProDetailDTO();
+                return View(NoteDTO);
+            } else 
+            {
 
-                NoteP notepAdd = new NoteP();
-                notepAdd.NotePDate = DateTime.Now;
-                notepAdd.NotePDescription = note.NotePDescription;
+                if (ModelState.IsValid)
+                {
+                    var _context = new DbCaimanContext();
 
-                projetAdd.NotePs.Add(notepAdd);
+                    Projet projetAdd = new Projet();
+                    projetAdd = _context.Projets.FirstOrDefault(c => c.ProjetId == id);
 
-                _context.Projets.Update(projetAdd);
-                _context.SaveChanges();
+                    projetAdd.NotePs = new List<NoteP>();
 
-                return RedirectToAction("ProjetDetail", "Projet", new { id = id });
+                    NoteP notepAdd = new NoteP();
+                    notepAdd.NotePDate = DateTime.Now;
+                    notepAdd.NotePDescription = note.NotePDescription;
+
+                    projetAdd.NotePs.Add(notepAdd);
+
+                    _context.Projets.Update(projetAdd);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("ProjetDetail", "Projet", new { id = id });
+                }
+                return View();
             }
-            return View();
+
         }
 
         public ActionResult DetailsNote(int id)
