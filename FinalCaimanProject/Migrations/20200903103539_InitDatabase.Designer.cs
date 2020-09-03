@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalCaimanProject.Migrations
 {
     [DbContext(typeof(DbCaimanContext))]
-    [Migration("20200902163053_InitDataBase")]
-    partial class InitDataBase
+    [Migration("20200903103539_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -254,7 +254,7 @@ namespace FinalCaimanProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ImageSpecialité")
+                    b.Property<string>("ImageSpecialite")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SpecialiteColor")
@@ -331,7 +331,7 @@ namespace FinalCaimanProject.Migrations
 
             modelBuilder.Entity("FinalCaimanProject.Models.Member", b =>
                 {
-                    b.HasOne("FinalCaimanProject.Models.Specialite", null)
+                    b.HasOne("FinalCaimanProject.Models.Specialite", "Specialite")
                         .WithMany("Members")
                         .HasForeignKey("SpecialiteId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -24,11 +24,15 @@
                                 </button>
                             </a>
                             &nbsp;&nbsp;
-                            <a href="/Home/FinishProjet/@Model.projetDetailDTO.ProjetId">
-                                <button class="btn-green">
-                                    projet terminer
-                                </button>
-                            </a>
+                            @if (Model.projetDetailDTO.IsArchieved != true)
+                            {
+                                <a href="/Home/FinishProjet/@Model.projetDetailDTO.ProjetId">
+                                    <button class="btn-green">
+                                        projet terminer
+                                    </button>
+                                </a>
+                            }
+
                         </div>
                         <div class="simple-card">
                             <div class="simple-card__progress mt-4">

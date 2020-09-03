@@ -83,7 +83,7 @@ namespace FinalCaimanProject.Models
         //Recupete la specialite dont le membre fait partie
 
         public int SpecialiteId { get; set; }
-        public virtual Specialite Specialite { get; set; }
+        public virtual Specialite Specialite{ get; set; }
 
 
         //la recuperation de la liste des competences

@@ -37,12 +37,12 @@ namespace FinalCaimanProject.DAL
                  .HasForeignKey(p => p.ProjetId);
 
 
-
+/*
             modelBuilder.Entity<Specialite>()
                 .HasMany(c => c.Members)
-                .WithOne(e => e.Specialite);
+                .WithOne(e => e.);
             modelBuilder.Entity<Member>()
-                .Ignore(x => x.Specialite);    
+                .Ignore(x => x.Specialite); */   
             
             modelBuilder.Entity<Transport>()
                 .HasMany(c => c.Members)

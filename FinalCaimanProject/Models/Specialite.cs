@@ -20,7 +20,7 @@ namespace FinalCaimanProject.Models
         public string SpecialiteInfo { get; set; }
 
         public string Url_Image { get; set; }
-        public string ImageSpecialité { get; set; }
+        public string ImageSpecialite { get; set; }
         //Recupere tous les membre d'une specialite
 
         public virtual ICollection<Member> Members { get; set; }

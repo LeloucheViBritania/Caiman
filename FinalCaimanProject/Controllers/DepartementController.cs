@@ -44,7 +44,7 @@ namespace FinalCaimanProject.Controllers
                         var path = Path.Combine(Server.MapPath(specialite.Url_Image), fileName);//Enregistrement du fichier dans le dossier Fichier
                         file.SaveAs(path);
 
-                        specialite.ImageSpecialité = fileName;
+                        specialite.ImageSpecialite = fileName;
 
                     }
                 }

@@ -252,7 +252,7 @@ namespace FinalCaimanProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ImageSpecialité")
+                    b.Property<string>("ImageSpecialite")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SpecialiteColor")
@@ -329,7 +329,7 @@ namespace FinalCaimanProject.Migrations
 
             modelBuilder.Entity("FinalCaimanProject.Models.Member", b =>
                 {
-                    b.HasOne("FinalCaimanProject.Models.Specialite", null)
+                    b.HasOne("FinalCaimanProject.Models.Specialite", "Specialite")
                         .WithMany("Members")
                         .HasForeignKey("SpecialiteId")
                         .OnDelete(DeleteBehavior.Cascade)

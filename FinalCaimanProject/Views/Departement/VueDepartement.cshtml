@@ -9,7 +9,7 @@
                         <div class="col-12">
                             <div class="team-card" style="border:1.5px solid @Model.SpecialiteColor">
                                 <div class="team-card__illustration">
-                                    <img src="@Html.DisplayFor(model => model.Url_Image)/@Html.DisplayFor(model => model.ImageSpecialité)" alt="departement">
+                                    <img src="@Html.DisplayFor(model => model.Url_Image)/@Html.DisplayFor(model => model.ImageSpecialite)" alt="departement">
                                 </div>
                                 <div class="mt-5">
                                     <button class="btn-green" data-toggle="modal" data-target="#respo">Choisir le chef</button>
@@ -24,11 +24,7 @@
                     <div class="departmentDesc">
                         <h1>Membres de groupe @Html.DisplayFor(model => model.SpecialiteName)</h1>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Dolor quaerat, molestias inventore tempora autem, sed,
-                            libero laudantium porro fugit repellendus vel ipsa
-                            adipisci aperiam pariatur dolores? Ex perspiciatis
-                            dolores fuga.
+                            @Model.SpecialiteInfo
                         </p>
                         <ul class="dmembers-list">
                             @foreach (var item in ViewBag.Membern)

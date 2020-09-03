@@ -14,6 +14,6 @@ namespace FinalCaimanProject.DTOs
         public string SpecialiteColor { get; set; }
 
         public string Url_Image { get; set; }
-        public string ImageSpecialité { get; set; }
+        public string ImageSpecialite{ get; set; }
     }
 }

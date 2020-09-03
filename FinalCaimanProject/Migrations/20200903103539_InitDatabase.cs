@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinalCaimanProject.Migrations
 {
-    public partial class InitDataBase : Migration
+    public partial class InitDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +56,7 @@ namespace FinalCaimanProject.Migrations
                     SpecialiteColor = table.Column<string>(nullable: true),
                     SpecialiteInfo = table.Column<string>(nullable: true),
                     Url_Image = table.Column<string>(nullable: true),
-                    ImageSpecialité = table.Column<string>(nullable: true)
+                    ImageSpecialite = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
