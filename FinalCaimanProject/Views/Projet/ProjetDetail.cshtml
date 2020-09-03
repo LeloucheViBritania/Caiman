@@ -157,6 +157,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-6">
                         <h2 class="mb-5">Paramètres</h2>
                         <div class="simple-card__content mb-5">
+                            <p class="text-danger">@ViewBag.ProgressSous</p>
                             <a href="#" data-toggle="modal" data-target="#progressModal">
                                 <button class="btn-green">
                                     Augmenter la progression
@@ -172,12 +173,14 @@
                                         <h5 class="modal-title" id="exampleModalLongTitle">Actuellement : @Model.projetDetailDTO.ProjetProgressBar %</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
+                                            
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         <form action="#" class="formular" method="post">
                                             <div class="form-group">
-                                                <input type="number" class="form-control" id="ProjetProgressBar" name="ProjetProgressBar" placeholder="progression du projet" max="96" min="0" value="@Model.projetDetailDTO.ProjetProgressBar">
+                                                <input type="number" class="form-control" id="ProjetProgressBar" name="ProjetProgressBar" placeholder="progression du projet" @*max="96" min="0"*@ value="@Model.projetDetailDTO.ProjetProgressBar">
+                                                <p class="text-danger">@ViewBag.Progress</p>
                                             </div>
                                             <button type="submit" class="btn-green">valider</button>
                                         </form>

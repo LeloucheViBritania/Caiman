@@ -23,10 +23,7 @@ namespace FinalCaimanProject.Controllers
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ProDetailVm proDetailVm = new ProDetailVm();
 
-            var projetDetail = _context.Projets.Include(c => c.ProjetMembers)
-                                                    .ThenInclude(m => m.Member)
-                                                .Include(no => no.NotePs)
-                                                .SingleOrDefault(c => c.ProjetId == id);
+            Projet projetDetail = NewMethod(id, _context);
 
             ViewBag.Specialites = _context.Specialites.ToList();
             var Members = _context.Members.ToList();
@@ -36,16 +33,9 @@ namespace FinalCaimanProject.Controllers
 
 
             List<Member> MemberNoINPro = new List<Member>();
-            foreach (var item in projetDe.MembersDTOs)
-            {
+            NewMethod1(projetDe, MemberNoINPro);
 
-                Member monMApp = Mapper.Map<MembersDTO, Member>(item);
-                MemberNoINPro.Add(monMApp);
-
-            }
-
-            List<int> tempIdList = MemberNoINPro.Select(q => q.MemberId).ToList();
-            var temp = _context.Members.Where(q => !tempIdList.Contains(q.MemberId));
+            IQueryable<Member> temp = NewMethod2(_context, MemberNoINPro);
 
 
             /* var meminNO = _context.Members.Intersect(MemberNoINPro);*/
@@ -54,20 +44,13 @@ namespace FinalCaimanProject.Controllers
             return View(proDetailVm);
         }
 
-        private Projet GetProDetails(int? idPro)
-        {
-            var _context = new DbCaimanContext();
-            var projet = _context.Projets
-                .Where(pro => pro.ProjetId == idPro)
-                .Include(no => no.NotePs
-                    .OrderByDescending(noId => noId.NotePId)
-                    .Take(2))
-                .Include(mPro => mPro.ProjetMembers)
-                    .ThenInclude(mem => mem.Member)
-                        .ThenInclude(sp => sp.Specialite)
-                .SingleOrDefault();
-            return projet;
-        }
+
+
+
+
+
+
+
 
 
         [HttpPost]
@@ -75,12 +58,10 @@ namespace FinalCaimanProject.Controllers
         {
 
             var _context = new DbCaimanContext();
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ProDetailVm proDetailVm = new ProDetailVm();
 
-            var projetDetail = _context.Projets.Include(c => c.ProjetMembers)
-                                                    .ThenInclude(m => m.Member)
-                                                .Include(no => no.NotePs)
-                                                .SingleOrDefault(c => c.ProjetId == id);
+            Projet projetDetail = NewMethod(id, _context);
 
             ViewBag.Specialites = _context.Specialites.ToList();
             var Members = _context.Members.ToList();
@@ -90,23 +71,20 @@ namespace FinalCaimanProject.Controllers
 
 
             List<Member> MemberNoINPro = new List<Member>();
-            foreach (var item in projetDe.MembersDTOs)
-            {
+            NewMethod1(projetDe, MemberNoINPro);
 
-                Member monMApp = Mapper.Map<MembersDTO, Member>(item);
-                MemberNoINPro.Add(monMApp);
+            IQueryable<Member> temp = NewMethod2(_context, MemberNoINPro);
 
-            }
 
-            List<int> tempIdList = MemberNoINPro.Select(q => q.MemberId).ToList();
-            var temp = _context.Members.Where(q => !tempIdList.Contains(q.MemberId));
-
+            /* var meminNO = _context.Members.Intersect(MemberNoINPro);*/
             proDetailVm.projetDetailDTO = projetDetailDTO;
             proDetailVm.Members = temp;
 
             /* var meminNO = _context.Members.Intersect(MemberNoINPro);*/
 
             /* _context.Dispose();*/
+            ViewBag.ProgressSous = "";
+            ViewBag.Progress = "";
 
             List<string> lisMembers = new List<string>();
             List<Member> memberSelect = new List<Member>();
@@ -133,6 +111,14 @@ namespace FinalCaimanProject.Controllers
                 if (ProjetProgressBar != null)
                 {
                     int progress = int.Parse(ProjetProgressBar);
+
+                    // verifier si la progression depasse 97% et ramene un message d'erreur
+                    if (progress > 97 )
+                    {
+                        ViewBag.ProgressSous = "La progression ne dois peut pas acceler 97 %";
+                        ViewBag.Progress = "Svp veuillez entrer une valeur inferieur a 97.01 %";
+                        return View(proDetailVm);
+                    }
                     if (listMemberIsSelected.ProjetProgressBar < progress && progress < 97)
                         listMemberIsSelected.ProjetProgressBar = progress;
                     contextNoTrack.Projets.Update(listMemberIsSelected);
@@ -165,6 +151,76 @@ namespace FinalCaimanProject.Controllers
             return View(proDetailVm);
 
         }
+
+
+
+
+
+
+
+        // View et post de projet detail les methodes
+
+        //recupere la liste des membre qui sont pas dans le projet
+        private static IQueryable<Member> NewMethod2(DbCaimanContext _context, List<Member> MemberNoINPro)
+        {
+            List<int> tempIdList = MemberNoINPro.Select(q => q.MemberId).ToList();
+            var temp = _context.Members.Where(q => !tempIdList.Contains(q.MemberId));
+            return temp;
+        }
+
+
+        // convert de chaque projet et ajout de des projet pour avoir une liste de projet 
+        private static void NewMethod1(ProjetDetailDTO projetDe, List<Member> MemberNoINPro)
+        {
+            foreach (var item in projetDe.MembersDTOs)
+            {
+
+                Member monMApp = Mapper.Map<MembersDTO, Member>(item);
+                MemberNoINPro.Add(monMApp);
+
+            }
+        }
+        //Recupere tous les projets et les membre qui y ont taffer
+
+        private static Projet NewMethod(int id, DbCaimanContext _context)
+        {
+            return _context.Projets.Include(c => c.ProjetMembers)
+                                                    .ThenInclude(m => m.Member)
+                                                .Include(no => no.NotePs)
+                                                .SingleOrDefault(c => c.ProjetId == id);
+        }
+
+        private Projet GetProDetails(int? idPro)
+        {
+            var _context = new DbCaimanContext();
+            var projet = _context.Projets
+                .Where(pro => pro.ProjetId == idPro)
+                .Include(no => no.NotePs
+                    .OrderByDescending(noId => noId.NotePId)
+                    .Take(2))
+                .Include(mPro => mPro.ProjetMembers)
+                    .ThenInclude(mem => mem.Member)
+                        .ThenInclude(sp => sp.Specialite)
+                .SingleOrDefault();
+            return projet;
+        }
+        //fin des methodes projet detail
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public ActionResult Directive(int id)
         {

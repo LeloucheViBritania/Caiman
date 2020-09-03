@@ -71,7 +71,7 @@ namespace FinalCaimanProject.Controllers
                     projetAdd = _context.Projets.FirstOrDefault(c => c.ProjetId == id);
 
                     projetAdd.NotePs = new List<NoteP>();
-
+                   
                     NoteP notepAdd = new NoteP();
                     notepAdd.NotePDate = DateTime.Now;
                     notepAdd.NotePDescription = note.NotePDescription;
