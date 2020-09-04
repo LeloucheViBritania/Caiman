@@ -203,9 +203,10 @@ namespace FinalCaimanProject.Controllers
 
                 foreach (var selectMember in temp)
                 {
+                    var _contextF = new DbCaimanContext();
                     var memUPDATE = _contextNoTrack.Members.SingleOrDefault(m => m.MemberId == selectMember.MemberId);
 
-                    _contextNoTrack.Dispose();
+                    _contextF.Dispose();
                     memUPDATE.MemberMissionActive -= 1;
                     memUPDATE.MemberMissonFin += 1;
 
