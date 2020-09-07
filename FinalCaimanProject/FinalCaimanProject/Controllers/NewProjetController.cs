@@ -52,6 +52,7 @@ namespace FinalCaimanProject.Controllers
 
         //Post d'un nouveau projet 
         [HttpPost]
+        /*[ValidateAntiForgeryToken]*/
         public ActionResult Index(FormCollection fromEnnui)
         {
             var _context = new DbCaimanContext();
@@ -83,20 +84,70 @@ namespace FinalCaimanProject.Controllers
             {
                 Member addMem = new Member();
                 addMem = _context.Members.FirstOrDefault(c => c.MemberId == int.Parse(item));
-                addMem.IsChecked = true;
                 memberSelect.Add(addMem);
             }
                 _context.Members.UpdateRange(memberSelect);
                  _context.SaveChanges();
 
+            var prName = fromEnnui[0];
+            var prDescription = fromEnnui["ProjetDescription"];
             var file = Request.Files[0];
+            if (prName == "" && prDescription == "" && file == null)
+            {
+                ViewData["ProjetName"] = "Svp veuillez rentrer le nom du projet";
+                ViewData["Description"] = "Svp veuillez rentrer la description du projet";
+                ViewData["Error"] = "Veuillez choisir un document pdf";
+
+
+                return View(viewModel);
+            }
+            else if (prName == "" && prDescription == "")
+            {
+                ViewData["ProjetName"] = "Svp veuillez rentrer le nom du projet";
+                ViewData["Description"] = "Svp veuillez rentrer la description du projet";
+
+                return View(viewModel);
+            }
+            else if (prName == "")
+            {
+                ViewData["ProjetName"] = "Svp veuillez rentrer le nom du projet";
+
+                return View(viewModel);
+            }
+
+            else if (prDescription == "")
+            {
+                ViewData["Description"] = "Svp veuillez rentrer la description du projet";
+               
+                return View(viewModel);
+
+            }
             if (file != null)
             {
+               
                 string projetCahier = "";
                 var fileName = Path.GetFileName(file.FileName); //Récupération du nom du fichier;
                 var ext = Path.GetExtension(fileName);
                 if (ext == ".pdf" || ext == ".PDF" || ext == ".docx")
                 {
+                    if (prName == "" && prDescription == "")
+                    {
+                        ViewData["ProjetName"] = "Svp veuillez rentrer le nom du projet";
+                        ViewData["Description"] = "Svp veuillez rentrer la description du projet";
+
+                        return View(viewModel);
+                    }
+                    else if (prName == "")
+                    {
+                        ViewData["ProjetName"] = "Svp veuillez rentrer le nom du projet";
+                        return View(viewModel);
+                    }
+                    else if (prDescription == "")
+                    {
+                        ViewData["Description"] = "Svp veuillez rentrer la description du projet";
+                        return View(viewModel);
+
+                    }
                     var path = Path.Combine(Server.MapPath("/Fichier"), fileName);//Enregistrement du fichier dans le dossier Fichier
                     file.SaveAs(path);
                      projetCahier = fileName;
@@ -116,18 +167,18 @@ namespace FinalCaimanProject.Controllers
                     var addProjetMembers = new Projet
                     {
                         ProjetCahierCharge = projetCahier,
-                        ProjetName = fromEnnui["ProjetName"],
+                        ProjetName = fromEnnui[0],
                         ProjetDateDebut = DateTime.Now,
-                        ProjetDescription = fromEnnui["ProjetDescription"],
+                        ProjetDescription = fromEnnui[1],
                         ProjetMembers = new List<ProjetMember>()
                     };
 
 
                     var contextNoTrack = new DbCaimanContext();
                     contextNoTrack.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-                    var listMemberIsSelected = contextNoTrack.Members.Where(c => c.IsChecked == true).ToList();
+                   /* var listMemberIsSelected = contextNoTrack.Members.Where(c => c.IsChecked == true).ToList();*/
 
-                    foreach (var selectMember in listMemberIsSelected)
+                    foreach (var selectMember in memberSelect)
                     {
                         var member = new Member
                         {
@@ -161,7 +212,6 @@ namespace FinalCaimanProject.Controllers
                     {
                         Member addMem = new Member();
                         addMem = _context.Members.FirstOrDefault(c => c.MemberId == int.Parse(item));
-                        addMem.IsChecked = false;
                         memberSelect.Add(addMem);
                         _context.Members.UpdateRange(memberSelect);
                     }
@@ -173,6 +223,8 @@ namespace FinalCaimanProject.Controllers
 
                 }
             }
+        
+
             return View(viewModel);
         }
 

@@ -12,6 +12,7 @@ namespace FinalCaimanProject.VM
     {
        public Member Member { get; set; }
         public IList<Specialite> Specialites { get; set; }
+        public IList<Transport> Transports { get; set; }
 
     }
 }

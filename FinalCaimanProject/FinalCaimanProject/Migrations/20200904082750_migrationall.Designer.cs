@@ -4,14 +4,16 @@ using FinalCaimanProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalCaimanProject.Migrations
 {
     [DbContext(typeof(DbCaimanContext))]
-    partial class DbCaimanContextModelSnapshot : ModelSnapshot
+    [Migration("20200904082750_migrationall")]
+    partial class migrationall
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,9 +130,6 @@ namespace FinalCaimanProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MemberStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MemberTransport")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SpecialiteId")

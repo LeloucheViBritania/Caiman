@@ -20,9 +20,10 @@
                                         <span>membres</span>
 
                                         <ul class="mb-0 mt-3">
+                                            @{ var co = 0;}
                                             @foreach (var mbr in item.MembersDTOs)
                                             {
-
+                                                if(co < 3)
                                                 {
 
                                                     <li>
@@ -44,6 +45,7 @@
 
                                                         </div>
                                                     </li>
+                                                    co++;
                                                 }
 
                                             }

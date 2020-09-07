@@ -40,7 +40,7 @@ namespace FinalCaimanProject.Controllers
                     if (file != null && file.ContentLength > 0)//Vérifie que le fichier existe
                     {
                         var fileName = Path.GetFileName(file.FileName); //Récupération du nom du fichier
-                        var ext = Path.GetExtension(fileName);
+                        var ext = Path.GetExtension(fileName).ToLower();
                         if (ext == ".jpg" || ext == ".png" || ext == ".jpeg" || ext == ".gif")
                         {
                             specialite.Url_Image = "/Fichier";

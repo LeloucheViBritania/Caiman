@@ -15,7 +15,7 @@ namespace FinalCaimanProject.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-1MOS7C0;Initial Catalog=FinalDbcaiman;Integrated Security=True"));
+            base.OnConfiguring(optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-3ALO5CA\SQLEXPRESS01;Initial Catalog=DbCaiman;Integrated Security=True"));
         }
 
 
@@ -42,8 +42,8 @@ namespace FinalCaimanProject.DAL
                 .HasMany(c => c.Members)
                 .WithOne(e => e.SpecialiteMember);
             modelBuilder.Entity<Member>()
-                .Ignore(x => x.SpecialiteMember);    
-            
+                .Ignore(x => x.SpecialiteMember);
+
             modelBuilder.Entity<Transport>()
                 .HasMany(c => c.Members)
                 .WithOne(e => e.TransportMember);

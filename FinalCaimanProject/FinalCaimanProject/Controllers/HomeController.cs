@@ -40,7 +40,7 @@ namespace FinalCaimanProject.Controllers
 
             }
 
-            ViewBag.Alls = allProjetMembers.Where(c => c.IsArchieved == false); ;
+            ViewBag.Alls = allProjetMembers.Where(c => c.IsArchieved == false).OrderByDescending(x=> x.ProjetId); ;
             VmAllP.Specialites = GetSpecilites();
 
             return View(VmAllP);
@@ -58,9 +58,12 @@ namespace FinalCaimanProject.Controllers
         {
             var _context = new DbCaimanContext();
             var spe = _context.Specialites.ToList();
+            var Tra = _context.Transports.ToList();
+
             var pm = new SaveMemberViewModel()
             {
-                Specialites = spe
+                Specialites = spe,
+                Transports = Tra
             };
 
             _context.Dispose();
@@ -116,9 +119,12 @@ namespace FinalCaimanProject.Controllers
         {
             var _context = new DbCaimanContext();
             var specialites = _context.Specialites.ToList();
+            var Tra = _context.Transports.ToList();
             var vM = new SaveMemberViewModel
             {
-                Specialites = specialites
+                Specialites = specialites,
+                Transports = Tra
+                
             };
 
             if (!ModelState.IsValid)
@@ -128,13 +134,28 @@ namespace FinalCaimanProject.Controllers
             }
             var tar = new Transport();
 
+            if (member.SpecialiteId == 0)
+            {
+                ViewBag.PasSpe = "Veuillez d'abord cree une specialite !";
+                vM.Member = member;
+                return View(vM);
+            }
             if (ModelState.IsValid)
             {
+                var date = DateTime.Today.Year;
+                if (member.MemberNaissance.Year >= date)
+                {
+                    ViewData["errordate"] = "L'année doit etre inférieure a l'année actuelle";
+                    vM.Member = member;
+                    return View(vM);
+                }
+
                 
                 Specialite _Specialite = _context.Specialites.FirstOrDefault(Sp => Sp.SpecialiteId == member.SpecialiteId);
                 _Specialite.Members = new List<Member>();
                 var memberAdd = new Member();
-                memberAdd.MemberCommune = member.MemberCommune;
+                memberAdd = member;
+                /*memberAdd.MemberCommune = member.MemberCommune;
                 memberAdd.MemberName = member.MemberName;
                 memberAdd.MemberPnom = member.MemberPnom;
                 memberAdd.MemberDescription = member.MemberDescription;
@@ -143,9 +164,12 @@ namespace FinalCaimanProject.Controllers
                 memberAdd.MemberPhone = member.MemberPhone;
                 memberAdd.MemberQuartier = member.MemberQuartier;
                 memberAdd.MemberMail = member.MemberMail;
-                memberAdd.MemberSex = member.MemberSex;
-                Transport _Transport = new Transport { TranportName = tar.TranportName };
+                memberAdd.MemberTransport = member.MemberTransport;
+                memberAdd.MemberSex = member.MemberSex;*/
+                Transport _Transport = _context.Transports.FirstOrDefault(Tr=>Tr.TransportId == member.TransportId);
+                
                 _Transport.Members = new List<Member>();
+              
 
                 if (_Specialite != null)
                 {
@@ -204,9 +228,10 @@ namespace FinalCaimanProject.Controllers
                 foreach (var selectMember in temp)
                 {
                     var _contextF = new DbCaimanContext();
-                    var memUPDATE = _contextNoTrack.Members.SingleOrDefault(m => m.MemberId == selectMember.MemberId);
+                    var memUPDATE = _contextF.Members.SingleOrDefault(m => m.MemberId == selectMember.MemberId);
 
                     _contextF.Dispose();
+
                     memUPDATE.MemberMissionActive -= 1;
                     memUPDATE.MemberMissonFin += 1;
 
@@ -338,7 +363,7 @@ namespace FinalCaimanProject.Controllers
 
             var count = bedroom.Count();
 
-            var data = bedroom.Skip(page * PageSize).Take(PageSize).ToList();
+            var data = bedroom.Skip(page * PageSize).Take(PageSize).ToList().OrderByDescending(x=> x.ProjetId);
 
             ViewBag.MaxPage = (count / PageSize) - (count % PageSize == 0 ? 1 : 0);
 

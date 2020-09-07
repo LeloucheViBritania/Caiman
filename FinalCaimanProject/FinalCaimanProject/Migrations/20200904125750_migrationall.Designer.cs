@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalCaimanProject.Migrations
 {
     [DbContext(typeof(DbCaimanContext))]
-    [Migration("20200904153810_migrationall")]
+    [Migration("20200904125750_migrationall")]
     partial class migrationall
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

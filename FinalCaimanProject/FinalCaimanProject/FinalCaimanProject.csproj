@@ -253,9 +253,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20200904153810_migrationall.cs" />
-    <Compile Include="Migrations\20200904153810_migrationall.designer.cs">
-      <DependentUpon>20200904153810_migrationall.cs</DependentUpon>
+    <Compile Include="Migrations\20200907141959_InitDatabase.cs" />
+    <Compile Include="Migrations\20200907141959_InitDatabase.designer.cs">
+      <DependentUpon>20200907141959_InitDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbCaimanContextModelSnapshot.cs" />
     <Compile Include="Models\Competence.cs" />
