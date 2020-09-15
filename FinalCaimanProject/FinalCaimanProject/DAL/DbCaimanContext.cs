@@ -11,12 +11,15 @@ namespace FinalCaimanProject.DAL
     public class DbCaimanContext : DbContext
     {
 
-       
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-3ALO5CA\SQLEXPRESS01;Initial Catalog=DbCaiman;Integrated Security=True"));
+            base.OnConfiguring(optionsBuilder.UseSqlServer(@"Data Source=sql5080.site4now.net;Initial Catalog=DB_A673E5_DbCaiman;Persist Security Info=True;User ID=DB_A673E5_DbCaiman_admin;Password=Olivier10;TrustServerCertificate=True"));
         }
+
+
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

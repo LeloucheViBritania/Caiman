@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  finalcaimanproject:
+    image: ${DOCKER_REGISTRY-}finalcaimanproject
+    build:
+      context: .\FinalCaimanProject
+      dockerfile: Dockerfile

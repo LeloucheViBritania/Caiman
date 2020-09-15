@@ -178,7 +178,7 @@ namespace FinalCaimanProject.Controllers
                 }
                 _Transport.Members.Add(memberAdd);
 
-                _context.Transports.Add(_Transport);
+                _context.Transports.Update(_Transport);
                 _context.SaveChanges();
                 _context.Dispose();
 

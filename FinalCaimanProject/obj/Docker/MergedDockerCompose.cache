@@ -1,0 +1,9 @@
+services:
+  finalcaimanproject:
+    build:
+      context: C:\Users\iMac 07\Documents\GitHub\Caiman\FinalCaimanProject\FinalCaimanProject
+      dockerfile: Dockerfile
+    image: finalcaimanproject
+    ports:
+    - target: 80
+version: '3.4'

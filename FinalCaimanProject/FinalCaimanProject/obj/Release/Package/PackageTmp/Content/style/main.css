@@ -504,7 +504,7 @@ li{
 
 .login-card__img-box {
     height: 30rem;
-    background: linear-gradient(transparent,transparent,transparent,#fff), url(../img/devs.jpg) center no-repeat;
+    background: linear-gradient(transparent,transparent,transparent,#fff), url(/Content/img/devs.jpg) center no-repeat;
     background-size: 120%;
     margin-bottom: 2rem;
     border-top-left-radius: 8px;

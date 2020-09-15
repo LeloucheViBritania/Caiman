@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  finalcaimanproject:
+    image: finalcaimanproject:dev
+    container_name: FinalCaimanProject
+    build:
+      args:
+        source: obj/Docker/empty/
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "FinalCaimanProject"
+    volumes:
+      - C:\Users\iMac 07\Documents\GitHub\Caiman\FinalCaimanProject\FinalCaimanProject:C:\inetpub\wwwroot
+      - :C:\remote_debugger:ro
+    entrypoint: cmd /c "start /B C:\\ServiceMonitor.exe w3svc & C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646"
+
