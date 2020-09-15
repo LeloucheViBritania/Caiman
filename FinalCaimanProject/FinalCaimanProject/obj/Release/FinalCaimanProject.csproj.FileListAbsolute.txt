@@ -164,3 +164,4 @@ C:\Users\iMac 07\Documents\GitHub\Caiman\FinalCaimanProject\FinalCaimanProject\o
 C:\Users\iMac 07\Documents\GitHub\Caiman\FinalCaimanProject\FinalCaimanProject\obj\Release\FinalCaimanProject.csproj.CopyComplete
 C:\Users\iMac 07\Documents\GitHub\Caiman\FinalCaimanProject\FinalCaimanProject\obj\Release\FinalCaimanProject.dll
 C:\Users\iMac 07\Documents\GitHub\Caiman\FinalCaimanProject\FinalCaimanProject\obj\Release\FinalCaimanProject.pdb
+C:\Users\iMac 07\Documents\GitHub\Caiman\FinalCaimanProject\FinalCaimanProject\bin\Elmah.dll
